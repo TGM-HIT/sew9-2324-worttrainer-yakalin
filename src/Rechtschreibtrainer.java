@@ -43,8 +43,8 @@ public class Rechtschreibtrainer {
     }
 
     public String input(URL url, String text){
-        Icon img = new ImageIcon(url.toString());
-        return (String) JOptionPane.showInputDialog(null, text, "", JOptionPane.QUESTION_MESSAGE, img, null, "");
+        Icon img = new ImageIcon("dog.png");
+        return (String) JOptionPane.showInputDialog(null, text, "", JOptionPane.PLAIN_MESSAGE, img, null, "");
     }
 
     public static void main(String[] args) throws IOException {

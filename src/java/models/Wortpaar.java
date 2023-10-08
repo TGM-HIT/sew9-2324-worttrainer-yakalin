@@ -1,4 +1,4 @@
-package java.model;
+package java.models;
 
 public class Wortpaar {
     private String url, word;

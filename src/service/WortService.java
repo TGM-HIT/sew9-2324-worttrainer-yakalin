@@ -1,5 +1,5 @@
 package service;
-import java.model.Wortpaar;
+import java.models.Wortpaar;
 import java.net.MalformedURLException;
 import java.util.*;
 

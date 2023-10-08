@@ -10,19 +10,41 @@ public class Rechtschreibtrainer {
 
     private int score, rounds;
 
+    private boolean running = true;
+
     private WortService service;
 
     public Rechtschreibtrainer() throws IOException {
         this.score = 0;
         this.rounds = 0;
         this.service = new WortService();
-        showWord();
+        startTrainer();
     }
 
-    public void showWord() throws IOException {
-        URL url = new URL(service.getRandomWord().getUrl());
-        Image img = ImageIO.read(url);
-        JOptionPane.showInputDialog(null, "Wort eingeben: ", img);
+    public void startTrainer() throws IOException {
+        String input = "";
+        String text = "";
+        while(running) {
+            URL url = new URL(service.getRandomWord().getUrl());
+            text = "Rundenzahl: " + this.rounds + "\nPunkte: " + this.score + "\nWort eingeben: ";
+            input = this.input(url, text);
+
+            if(input.equals("exit")){
+                this.running = false;
+            }
+            else{
+                if(service.validateUserInput(url.toString(), input)){
+                    this.score++;
+                }
+                this.rounds++;
+            }
+
+        }
+    }
+
+    public String input(URL url, String text){
+        Icon img = new ImageIcon(url.toString());
+        return (String) JOptionPane.showInputDialog(null, text, "", JOptionPane.QUESTION_MESSAGE, img, null, "");
     }
 
     public static void main(String[] args) throws IOException {

@@ -1,5 +1,5 @@
 package service;
-import java.models.Wortpaar;
+import models.Wortpaar;
 import java.net.MalformedURLException;
 import java.util.*;
 
@@ -19,17 +19,18 @@ public class WortService {
     }
 
     public Wortpaar getRandomWord() {
-        Random gen = new Random(1234);
-        int randomNumber = gen.nextInt(this.wortliste.size());
+        Random gen = new Random();
+        int randomNumber = gen.nextInt(this.wortliste.size())+1;
         Iterator<Wortpaar> it = this.wortliste.iterator();
         Wortpaar randomWord = null;
-        for(;it.hasNext() && randomNumber != 0; randomNumber--){
+        for(;randomNumber != 0; randomNumber--){
             randomWord = it.next();
         }
         return randomWord;
     }
 
     public boolean validateUserInput(String url, String input){
+        input = input.toLowerCase();
         Iterator<Wortpaar> it = this.wortliste.iterator();
         Wortpaar wp;
         while(it.hasNext()){

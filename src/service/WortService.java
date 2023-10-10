@@ -1,5 +1,8 @@
 package service;
 import models.Wortpaar;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.net.MalformedURLException;
 import java.util.*;
 
@@ -11,6 +14,7 @@ import java.util.*;
 public class WortService {
     // Diese Map hat als Key die URL und als value das Wort
     private final List<Wortpaar> wortliste = new ArrayList<>();
+    private final PersistencyService persistencyService = new JSONService();
 
     public WortService() throws MalformedURLException {
         wortliste.add(new Wortpaar("https://www.bmel.de/SharedDocs/Bilder/DE/_Tiere/Haus-Zootiere/tierschutz-hunde.jpg?__blob=wide&v=3", "hund"));
@@ -42,8 +46,23 @@ public class WortService {
         return false;
     }
 
-    public void addWord(String url, String word){
-        Wortpaar neu = new Wortpaar(url, word);
-        this.wortliste.add(neu);
+    public int[] loadData(String path){
+        JSONObject data = persistencyService.read(path);
+        int[] array = new int[2];
+        if(data != null) {
+            int rounds = Integer.parseInt(data.get("rounds").toString());
+            int score = Integer.parseInt(data.get("score").toString());
+            array[0] = rounds;
+            array[1] = score;
+        }
+        else{
+            array[0] = 0;
+            array[1] = 0;
+        }
+        return array;
+    }
+
+    public void saveData(String path, int rounds, int score){
+        persistencyService.save(path, rounds, score);
     }
 }

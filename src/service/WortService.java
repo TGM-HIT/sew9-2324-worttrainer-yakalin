@@ -16,7 +16,7 @@ public class WortService {
     private final List<Wortpaar> wortliste = new ArrayList<>();
     private final PersistencyService persistencyService = new JSONService();
 
-    public WortService() throws MalformedURLException {
+    public WortService(){
         wortliste.add(new Wortpaar("https://www.bmel.de/SharedDocs/Bilder/DE/_Tiere/Haus-Zootiere/tierschutz-hunde.jpg?__blob=wide&v=3", "hund"));
         wortliste.add(new Wortpaar("https://www.kindernetz.de/wissen/tierlexikon/1655279778114,steckbrief-katze-102~_v-16x9@2dL_-6c42aff4e68b43c7868c3240d3ebfa29867457da.jpg", "katze"));
         wortliste.add(new Wortpaar("https://cdn.pixabay.com/photo/2013/07/13/10/51/football-157930_1280.png", "ball"));
